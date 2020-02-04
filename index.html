@@ -1,38 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exercicio 1</title>
 </head>
+
 <body>
-    oi
+    <h1 align="center">PETSHOP DA RD</h1>
     <script>
         console.log("******* PETSHOP DA RD *******");
-        /*
-            nome, idade, raca, peso, cor, dono, vacinado, serviços
-        */
-        var cachorro = {
-            raca: "Vira-lata",
-            nome: "Shazam",
-            peso: 13.7,
-            idade: 3,
-            dono: "Riquelme",
-            cor: "Preto",
-            vacinado: false,
-            servicos: ["Banho","vacina"]
+        var pets = [];
+
+        class Cachorro {
+            constructor(_raca, _nome, _idade, _peso, _cor, _dono, _vacinado, _servicos, _tipo) {
+                this.nome = _nome;
+                this.raca = _raca;
+                this.idade = _idade;
+                this.peso = _peso;
+                this.cor = _cor;
+                this.dono = _dono;
+                this.vacinado = _vacinado;
+                this.servicos = _servicos;
+                this.tipo = _tipo;
+            }
         }
 
-        function vacinar(cachorro){
-            //implentar a função
-            if(cachorro.vacinado){
-                console.log("O cachorro " + cachorro.nome + " não pode ser vacinado pois já é vacinado")
-            }else{
-                cachorro.vacinado = true;
-                console.log("O cachorro " + cachorro.nome + " foi vacinado")
+        class Gato {
+            constructor(_nome, _idade, _peso, _cor, _dono, _vacinado, _servicos, _tipo) {
+                this.nome = _nome;
+                this.idade = _idade;
+                this.peso = _peso;
+                this.cor = _cor;
+                this.dono = _dono;
+                this.vacinado = _vacinado;
+                this.servicos = _servicos;
+                this.tipo = _tipo
             }
+        }
+
+        class Tartaruga {
+            constructor(_nome, _idade, _peso, _dono, _vacinado, _servicos, _tipo) {
+                this.nome = _nome;
+                this.idade = _idade;
+                this.peso = _peso;
+                this.dono = _dono;
+                this.vacinado = _vacinado;
+                this.servicos = _servicos;
+                this.tipo = _tipo;
+            }
+        }
+
+        let cachorro1 = new Cachorro("vira-latas", "Doguinho", 5, 5.8, "marrom", { nome: "igor", idade: 25 }, true, ["Banho"], "Cachorro");
+        let gato1 = new Gato("Cat", 7, 7.8, "Cinza", { nome: "Mauricio", idade: 25 }, false, ["Vacinar", "Banho"], "Gato");
+        let gato2 = new Gato("Pimpolho", 7, 7.8, "Cinza", { nome: "Mauricio", idade: 25 }, false, ["Vacinar", "Banho"], "Gato");
+        let tartaruga1 = new Tartaruga("Squirtle", 60, 30.5, { nome: "Edson", idade: 26 }, false, ["Banho"], "Tartaruga");
+
+        pets.push(cachorro1);
+        pets.push(gato1);
+        pets.push(gato2);
+        pets.push(tartaruga1);
+
+        const vacinar = pets => {
+            //implentar a função
+            pets.forEach((pet, index) => {
+                if (pet.vacinado) {
+                    console.log(pet.tipo + "  " + pet.nome + " não pode ser vacinado, pois já é vacinado")
+                } else {
+                    pet.vacinado = true;
+                    console.log(pet.tipo + " " + pet.nome + " foi vacinado")
+                }
+            });
+        }
+
+        const adicionarPet = (nome, idade, raca, tipo, peso, cor, vacinado, servicos) => {
+            let pet = {
+                nome: nome,
+                idade: idade,
+                raca: raca,
+                tipo: tipo,
+                peso: peso,
+                cor: cor,
+                dono: {
+                    nome: null,
+                    idade: null
+                },
+                vacinado: vacinado,
+                servicos: servicos
+            }
+
+            pets.push(pet);
+            console.log("O pet foi adicionado ao sistema");
+        }
+
+        const imprimirPets = () => {
+            console.log("--------------------------------------");
+            pets.forEach((pet, index) => {
+                console.log("Pet " + (index + 1) + ":")
+                console.log("Nome do pet: " + pet.nome);
+                console.log("Tipo do pet: " + pet.tipo);
+                console.log(pet.vacinado ? "Esse pet já está vacinado" : "Esse pet ainda não foi vacinado");
+                console.log("--------------------------------------");
+            });
+        }
+
+        // const filtrarPetsGatos = () => {
+        //     let gatos = [];
+
+        //     pets.forEach((pet) => {
+        //         if (pet.tipo.includes("Gato")) {
+        //             gatos.push(pet);
+        //         }
+        //     })
+
+        //     return gatos;
+        // }
+
+        const filtrarPetsGatos = () => {
+            let gatos = pets.filter((pet, index) =>{
+                return pet.tipo == "Gato"
+            });
+
+            return gatos;
+        }
+
+        const vacinarTodos = () => {
+            pets.map((pet) =>{
+                return pet.vacinado ? 0 : pet.vacinado = true
+            })
+            console.log("Todos os pets foram vacinados!")
         }
     </script>
 </body>
+
 </html>
